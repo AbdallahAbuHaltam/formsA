@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,18 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('f',{static:true}) signUpForm:NgForm;
   defaultQuestion:string='teacher';
   answer='';
   genders=['male','female'];
 
   suggestUserName() {
     const suggestedName = 'Superuser';
+    this.signUpForm.form.patchValue({
+      userData:{
+        username:suggestedName
+      }
+    })
   }
 
   onSubmit(form:NgForm){
